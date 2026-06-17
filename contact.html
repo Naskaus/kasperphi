@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Kasperphi</title>
+  <meta name="description" content="Écrire à Kasperphi. Ton sobre, pas corporate. Un mot dans le grand cahier." />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="masthead">
+      <a class="brand-link" href="index.html">
+        <div class="brand">Kasperphi</div>
+        <div class="brand-tag">Revue artistique satirique</div>
+      </a>
+      <button class="burger" aria-expanded="false" aria-controls="primary-nav">☰ Menu</button>
+      <nav class="main-nav" id="primary-nav" aria-label="Navigation principale">
+        <a href="index.html">Accueil</a>
+        <a href="manifeste.html">Manifeste</a>
+        <a href="rubriques.html">Rubriques</a>
+        <a href="creations.html">Créations</a>
+        <a href="univers.html">Univers</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="block" style="border-bottom:none; padding-bottom:10px;">
+        <h1 class="page-title">Contact</h1>
+        <p class="page-lead">Un mot, une insulte élégante, une proposition de comptoir. Tout se lit.</p>
+      </section>
+
+      <section class="block">
+        <form class="contact" novalidate>
+          <div class="field">
+            <label for="nom">Votre nom (ou pseudonyme de scène)</label>
+            <input id="nom" name="nom" type="text" required autocomplete="name" />
+            <span class="err">Il faut bien signer quelque part.</span>
+          </div>
+
+          <div class="field">
+            <label for="email">Votre adresse</label>
+            <input id="email" name="email" type="email" required autocomplete="email" placeholder="vous@quelquepart.fr" />
+            <span class="err">Une adresse valable, pour qu'on puisse vous répondre de travers.</span>
+          </div>
+
+          <div class="field">
+            <label for="message">Votre message</label>
+            <textarea id="message" name="message" required placeholder="Dites tout. Ou presque."></textarea>
+            <span class="err">La page est vide. Ce serait dommage.</span>
+          </div>
+
+          <div class="center">
+            <button class="btn primary" type="submit">Envoyer dans le grand cahier</button>
+          </div>
+
+          <p class="form-note" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="contact-aside">
+          Ou, pour les amateurs de papier&nbsp;: <strong>bonjour@kasperphi.fr</strong><br>
+          Réponses lentes, sincères, et parfois rimées.
+        </p>
+      </section>
+    </main>
+
+    <footer class="colophon">
+      <strong>Kasperphi</strong>
+      <em>Artificiel, peut-être. Automatique, jamais.</em>
+      <nav class="foot-nav" aria-label="Pied de page">
+        <a href="manifeste.html">Manifeste</a>
+        <a href="creations.html">Créations</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </footer>
+  </div>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

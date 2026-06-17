@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brief web designer — Site Kasperphi</title>
+  <style>
+    :root {
+      --paper: #f4ead6;
+      --paper-dark: #ead9b8;
+      --ink: #1f160f;
+      --red: #8f1f16;
+      --red-dark: #67130e;
+      --line: rgba(143, 31, 22, 0.55);
+      --muted: #5a4634;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(143, 31, 22, 0.08), transparent 35%),
+        linear-gradient(180deg, #f8efd9 0%, var(--paper) 100%);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image:
+        linear-gradient(rgba(90, 70, 52, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(90, 70, 52, 0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mix-blend-mode: multiply;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 28px));
+      margin: 18px auto;
+      border: 4px double var(--red);
+      padding: 26px 34px 34px;
+      background:
+        linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.05)),
+        var(--paper);
+      box-shadow: 0 12px 40px rgba(40, 20, 10, 0.18);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      color: var(--red);
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 0.95;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      font-size: 1.15rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px 18px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    nav a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+
+    nav a:hover {
+      color: var(--red);
+      border-color: var(--red);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      padding: 40px 0 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--red);
+      font-size: clamp(3rem, 10vw, 7.5rem);
+      line-height: 0.86;
+      letter-spacing: 0.02em;
+    }
+
+    .hero h2 {
+      margin: 18px 0 18px;
+      font-size: clamp(1.4rem, 3vw, 2.5rem);
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      max-width: 620px;
+      font-size: 1.25rem;
+    }
+
+    .hero-card {
+      border: 2px solid var(--line);
+      padding: 26px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .hero-card .label {
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .hero-card .big-quote {
+      margin: 12px 0 0;
+      font-size: 2rem;
+      line-height: 1.12;
+      font-style: italic;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 18px;
+      border: 2px solid var(--red);
+      color: var(--red);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: transparent;
+    }
+
+    .btn.primary {
+      background: var(--red);
+      color: #fff4df;
+    }
+
+    .btn:hover {
+      background: var(--red-dark);
+      color: #fff4df;
+      border-color: var(--red-dark);
+    }
+
+    section {
+      padding: 34px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 0 0 24px;
+      color: var(--red);
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .ornament {
+      text-align: center;
+      color: var(--red);
+      margin-top: -18px;
+      margin-bottom: 24px;
+    }
+
+    h3 {
+      color: var(--red);
+      font-size: 1.45rem;
+      margin: 0 0 12px;
+    }
+
+    h4 {
+      margin: 22px 0 8px;
+      color: var(--red);
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .intro-box {
+      display: grid;
+      grid-template-columns: 120px 1fr 210px;
+      align-items: center;
+      gap: 24px;
+      border: 4px double var(--line);
+      padding: 22px;
+      background: rgba(255,255,255,0.18);
+    }
+
+    .pointing {
+      font-size: 4rem;
+      color: var(--red);
+      line-height: 1;
+      text-align: center;
+    }
+
+    .grid-3,
+    .grid-4,
+    .grid-6 {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .grid-6 {
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    .card {
+      border: 1.5px solid var(--line);
+      padding: 18px;
+      background: rgba(255,255,255,0.18);
+    }
+
+    .card .category {
+      color: var(--red);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 1.35rem;
+      line-height: 1.1;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      margin: 0 0 12px;
+    }
+
+    .card a {
+      color: var(--red);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+
+    .card a:hover {
+      text-decoration: underline;
+    }
+
+    .icon {
+      font-size: 2.7rem;
+      margin-bottom: 10px;
+      filter: grayscale(1);
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 20px;
+    }
+
+    .spec-block {
+      border-left: 4px solid var(--red);
+      padding-left: 16px;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    .quote {
+      border: 4px double var(--line);
+      padding: 22px;
+      margin: 22px 0;
+      color: var(--red);
+      font-size: 1.45rem;
+      text-align: center;
+      font-style: italic;
+      background: rgba(255,255,255,0.18);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      background: rgba(255,255,255,0.12);
+    }
+
+    th,
+    td {
+      border: 1px solid var(--line);
+      padding: 12px;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+
+    footer {
+      border-top: 4px double var(--line);
+      margin-top: 20px;
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      color: var(--red);
+    }
+
+    footer strong {
+      font-size: 1.8rem;
+    }
+
+    footer em {
+      color: var(--ink);
+      font-size: 1.25rem;
+    }
+
+    @media (max-width: 900px) {
+      header,
+      .hero,
+      .intro-box,
+      .specs {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        display: block;
+      }
+
+      nav {
+        justify-content: flex-start;
+        margin-top: 18px;
+      }
+
+      .grid-3,
+      .grid-4,
+      .grid-6 {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .intro-box {
+        display: block;
+      }
+
+      .pointing {
+        text-align: left;
+        margin-bottom: 10px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        width: calc(100% - 14px);
+        margin: 7px auto;
+        padding: 18px;
+      }
+
+      .grid-3,
+      .grid-4,
+      .grid-6 {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+
+      th {
+        border-bottom: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <div class="brand">Kasperphi</div>
+        <div class="subtitle">Brief web designer — architecture, sections, boutons et articulation du site</div>
+      </div>
+      <nav aria-label="Navigation du document">
+        <a href="#intention">Intention</a>
+        <a href="#accueil">Accueil</a>
+        <a href="#sections">Sections</a>
+        <a href="#pages">Pages</a>
+        <a href="#mobile">Mobile</a>
+        <a href="#boutons">Boutons</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="intention">
+        <div>
+          <h1>KASPERPHI</h1>
+          <h2>L’élégance de travers.</h2>
+          <p>
+            Le site doit être pensé comme une revue artistique satirique :
+            une couverture de livre ancien devenue navigable, entre cabaret littéraire,
+            manifeste personnel, chansons bancales, souvenirs maquillés et images de travers.
+          </p>
+          <div class="buttons">
+            <a class="btn primary" href="#sections">Voir les sections</a>
+            <a class="btn" href="#pages">Voir les pages</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div class="label">Phrase signature</div>
+          <p class="big-quote">Artificiel, peut-être.<br>Automatique, jamais.</p>
+        </aside>
+      </section>
+
+      <section>
+        <h2 class="section-title">1. Intention générale</h2>
+        <div class="ornament">✦</div>
+        <p>
+          Le site présente des créations faites avec l’aide de l’intelligence artificielle,
+          mais toujours reprises, orientées, corrigées, montées et assumées par Kasperphi.
+          Il ne doit pas ressembler à une plateforme IA, ni à un portfolio froid.
+        </p>
+        <p>
+          Il doit ressembler à un objet éditorial : papier vieilli, gravures, cadres,
+          rouge profond, typographie littéraire, humour noir discret et élégance un peu bancale.
+        </p>
+        <div class="quote">
+          Le site n’est pas une vitrine technologique. C’est une porte d’entrée dans un théâtre personnel.
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">2. Identité visuelle</h2>
+        <div class="ornament">✦</div>
+
+        <div class="specs">
+          <div class="spec-block">
+            <h3>Style graphique</h3>
+            <ul>
+              <li>Ancienne couverture de livre.</li>
+              <li>Affiche de cabaret littéraire.</li>
+              <li>Journal satirique.</li>
+              <li>Gravures noir et blanc.</li>
+              <li>Cadres rouges et séparateurs fins.</li>
+            </ul>
+          </div>
+
+          <div class="spec-block">
+            <h3>Couleurs</h3>
+            <ul>
+              <li>Fond beige / crème / papier ancien.</li>
+              <li>Rouge brun profond comme couleur principale.</li>
+              <li>Noir encre pour le texte.</li>
+              <li>Brun léger pour les nuances.</li>
+            </ul>
+          </div>
+
+          <div class="spec-block">
+            <h3>Typographies</h3>
+            <ul>
+              <li>Titres en serif très marquée.</li>
+              <li>Corps de texte en serif lisible.</li>
+              <li>Boutons et menus en capitales.</li>
+              <li>Style éditorial, jamais startup.</li>
+            </ul>
+          </div>
+
+          <div class="spec-block">
+            <h3>Structure visuelle</h3>
+            <ul>
+              <li>Site centré dans un grand cadre rouge.</li>
+              <li>Marges généreuses.</li>
+              <li>Cartes encadrées comme des vignettes de revue.</li>
+              <li>Illustrations intégrées au sens du bloc.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="accueil">
+        <h2 class="section-title">3. Navigation principale</h2>
+        <div class="ornament">✦</div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Élément</th>
+              <th>Contenu</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Logo</td>
+              <td>Kasperphi</td>
+              <td>Retour accueil</td>
+            </tr>
+            <tr>
+              <td>Menu</td>
+              <td>Accueil / Manifeste / Rubriques / Créations / Univers / Contact</td>
+              <td>Navigation principale</td>
+            </tr>
+            <tr>
+              <td>État actif</td>
+              <td>Accueil souligné en rouge sur la page d’accueil</td>
+              <td>Repère visuel</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="sections">
+        <h2 class="section-title">4. Page d’accueil — ordre des sections</h2>
+        <div class="ornament">✦</div>
+
+        <ol>
+          <li>Header / navigation</li>
+          <li>Hero principal</li>
+          <li>Bloc manifeste court : “Avant d’entrer”</li>
+          <li>Section “Dernières créations”</li>
+          <li>Section “Rubriques”</li>
+          <li>Section “Univers”</li>
+          <li>Footer / signature</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 class="section-title">Section Hero</h2>
+        <div class="ornament">✦</div>
+
+        <h3>Titre principal</h3>
+        <p><strong>KASPERPHI</strong></p>
+
+        <h3>Sous-titre</h3>
+        <p><strong>L’ÉLÉGANCE DE TRAVERS.</strong></p>
+
+        <h3>Texte d’introduction</h3>
+        <p>
+          Textes, chansons, images et autres accidents choisis,
+          fabriqués avec IA, mais jamais laissés en roue libre.
+        </p>
+
+        <h3>Illustration principale</h3>
+        <p>
+          À droite : personnage en gravure, micro à la main, livre ouvert,
+          attitude expressive de scène. L’image doit évoquer le One Mon Show littéraire,
+          le cabaret, la performance orale, la littérature détournée et l’humour.
+        </p>
+
+        <h3>Boutons du hero</h3>
+        <div class="buttons">
+          <span class="btn primary">Nouvelles créations</span>
+          <span class="btn">Explorer les rubriques</span>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">Bloc “Avant d’entrer”</h2>
+        <div class="ornament">✦</div>
+
+        <div class="intro-box">
+          <div class="pointing">☞</div>
+          <div>
+            <h3>AVANT D’ENTRER</h3>
+            <p>
+              Si les créations faites avec l’aide de l’intelligence artificielle
+              vous donnent des boutons, des vapeurs ou l’envie d’écrire sur la mort de l’art,
+              vous pouvez partir maintenant.
+            </p>
+            <p><strong>Sans rancune.</strong></p>
+          </div>
+          <div>
+            <span class="btn">Lire le manifeste</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">Dernières créations</h2>
+        <div class="ornament">✦</div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="category">One Mon Show</div>
+            <div class="card-title">Le braquage de la boulangerie</div>
+            <p>Une opération commando à hauteur de bonbons.</p>
+            <a href="#">Lire / écouter →</a>
+          </article>
+
+          <article class="card">
+            <div class="category">Chanson</div>
+            <div class="card-title">Chaos en ordre alphabétique</div>
+            <p>Petit désordre lexical sur fond de monde fatigué.</p>
+            <a href="#">Lire / écouter →</a>
+          </article>
+
+          <article class="card">
+            <div class="category">Chanson</div>
+            <div class="card-title">Le décor en carton</div>
+            <p>Un spectateur lucide devant un théâtre mal fixé.</p>
+            <a href="#">Lire / écouter →</a>
+          </article>
+        </div>
+
+        <div class="center" style="margin-top: 20px;">
+          <span class="btn">Voir toutes les créations</span>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">Rubriques</h2>
+        <div class="ornament">✦</div>
+
+        <div class="grid-4">
+          <article class="card">
+            <div class="icon">🎩</div>
+            <div class="card-title">One Mon Show littéraire</div>
+            <p>Textes de scène, souvenirs rejoués, auteurs dérangés et mauvaise foi élégante.</p>
+            <a href="#">Explorer →</a>
+          </article>
+
+          <article class="card">
+            <div class="icon">🎙️</div>
+            <div class="card-title">Musique</div>
+            <p>Chansons bancales, refrains tordus, rock fatigué et mélodies de comptoir.</p>
+            <a href="#">Explorer →</a>
+          </article>
+
+          <article class="card">
+            <div class="icon">🖼️</div>
+            <div class="card-title">Images</div>
+            <p>Affiches, pochettes, visuels et élégance de travers.</p>
+            <a href="#">Explorer →</a>
+          </article>
+
+          <article class="card">
+            <div class="icon">⌨️</div>
+            <div class="card-title">Textes</div>
+            <p>Monologues, fragments, catastrophes ordinaires et souvenirs maquillés.</p>
+            <a href="#">Explorer →</a>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">Univers</h2>
+        <div class="ornament">Les territoires de Kasperphi</div>
+
+        <div class="grid-6">
+          <article class="card">
+            <div class="icon">💼</div>
+            <div class="category">Souvenirs maquillés</div>
+            <p>École primaire, boulangerie, copains, cancres et mythologies minuscules.</p>
+            <a href="#">Explorer →</a>
+          </article>
+
+          <article class="card">
+            <div class="icon">🎩</div>
+            <div class="category">Cabaret littéraire</div>
+            <p>Textes de scène, auteurs dérangés et littérature descendue au comptoir.</p>
+            <a href="#">Explorer →</a>
+          </article>
+
+          <article class="card">
+            <div class="icon">🎙️</div>
+            <div class="category">Chansons bancales</div>
+            <p>Refrains tordus, voix imaginaires, rock fatigué et mélodies qui fument.</p>
+            <a href="#">Explorer →</a>
+          </article>
+
+          <article class="card">
+            <div class="icon">⏱️</div>
+            <div class="category">Catastrophes ordinaires</div>
+            <p>Langue qui s’efface, monde qui accélère, institutions qui toussent.</p>
+            <a href="#">Explorer →</a>
+          </article>
+
+          <article class="card">
+            <div class="icon">🍷</div>
+            <div class="category">Nice fantôme</div>
+            <p>Place Arson, terrains de boules, enfance urbaine et folklore personnel.</p>
+            <a href="#">Explorer →</a>
+          </article>
+
+          <article class="card">
+            <div class="icon">👞</div>
+            <div class="category">Élégance de travers</div>
+            <p>Formes imparfaites, phrases qui boitent et idées mal coiffées.</p>
+            <a href="#">Explorer →</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="pages">
+        <h2 class="section-title">5. Pages à prévoir</h2>
+        <div class="ornament">✦</div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Page</th>
+              <th>Contenu</th>
+              <th>Remarque</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Accueil</td>
+              <td>Page principale avec hero, manifeste court, dernières créations, rubriques, univers.</td>
+              <td>Doit donner immédiatement le ton.</td>
+            </tr>
+            <tr>
+              <td>Manifeste</td>
+              <td>Texte complet sur la création avec IA, la légitimité, le manque, le désir artistique.</td>
+              <td>Page essentielle pour assumer le projet.</td>
+            </tr>
+            <tr>
+              <td>Créations</td>
+              <td>Liste complète avec filtres : Tout, One Mon Show, Chansons, Images, Textes, Pochettes.</td>
+              <td>Chaque création doit pouvoir avoir sa propre page.</td>
+            </tr>
+            <tr>
+              <td>Rubriques</td>
+              <td>Présentation des grandes catégories : One Mon Show, Musique, Images, Textes.</td>
+              <td>Classement simple et clair.</td>
+            </tr>
+            <tr>
+              <td>Univers</td>
+              <td>Présentation des territoires poétiques : souvenirs, cabaret, chansons, catastrophes, Nice, élégance de travers.</td>
+              <td>Lecture plus personnelle et thématique.</td>
+            </tr>
+            <tr>
+              <td>Contact</td>
+              <td>Formulaire simple ou adresse de contact.</td>
+              <td>Ton sobre, pas corporate.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="mobile">
+        <h2 class="section-title">6. Comportement mobile</h2>
+        <div class="ornament">✦</div>
+
+        <ul>
+          <li>Conserver l’esprit couverture / affiche ancienne.</li>
+          <li>Passer le hero en colonne.</li>
+          <li>Mettre les cartes “Dernières créations” en une colonne.</li>
+          <li>Adapter les rubriques en deux colonnes si possible, sinon une colonne.</li>
+          <li>Prévoir un menu burger ou une navigation simplifiée.</li>
+          <li>Garder des boutons lisibles et faciles à toucher.</li>
+        </ul>
+      </section>
+
+      <section id="boutons">
+        <h2 class="section-title">7. Boutons du site</h2>
+        <div class="ornament">✦</div>
+
+        <div class="specs">
+          <div class="spec-block">
+            <h3>Boutons principaux</h3>
+            <ul>
+              <li>NOUVELLES CRÉATIONS</li>
+              <li>VOIR TOUTES LES CRÉATIONS</li>
+            </ul>
+            <p>Fond rouge profond, texte crème.</p>
+          </div>
+
+          <div class="spec-block">
+            <h3>Boutons secondaires</h3>
+            <ul>
+              <li>EXPLORER LES RUBRIQUES</li>
+              <li>LIRE LE MANIFESTE</li>
+              <li>EXPLORER →</li>
+              <li>LIRE / ÉCOUTER →</li>
+            </ul>
+            <p>Contour rouge profond, fond crème, texte rouge.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">8. Ton éditorial</h2>
+        <div class="ornament">✦</div>
+
+        <div class="specs">
+          <div class="spec-block">
+            <h3>À privilégier</h3>
+            <ul>
+              <li>Textes, chansons, images et autres accidents choisis.</li>
+              <li>Fabriqués avec IA, mais jamais laissés en roue libre.</li>
+              <li>Artificiel, peut-être. Automatique, jamais.</li>
+              <li>L’élégance de travers.</li>
+            </ul>
+          </div>
+
+          <div class="spec-block">
+            <h3>À éviter</h3>
+            <ul>
+              <li>Découvrez mon univers créatif innovant.</li>
+              <li>Une expérience immersive unique.</li>
+              <li>Créateur de contenu augmenté par l’intelligence artificielle.</li>
+              <li>Un ton startup, froid ou trop technologique.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="section-title">9. Résumé de l’articulation</h2>
+        <div class="ornament">✦</div>
+
+        <ol>
+          <li><strong>Qui est Kasperphi ?</strong> Une identité artistique, littéraire et satirique.</li>
+          <li><strong>Quelle est la position ?</strong> Oui, l’IA est là, mais elle n’est pas seule aux commandes.</li>
+          <li><strong>Que peut-on voir maintenant ?</strong> Les dernières créations.</li>
+          <li><strong>Comment explorer ?</strong> Par rubriques : One Mon Show, Musique, Images, Textes.</li>
+          <li><strong>Quels sont les mondes récurrents ?</strong> Souvenirs, cabaret, chansons, catastrophes, Nice, élégance de travers.</li>
+          <li><strong>Quelle phrase doit rester en tête ?</strong> Artificiel, peut-être. Automatique, jamais.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <strong>Kasperphi</strong>
+      <em>Artificiel, peut-être. Automatique, jamais.</em>
+      <span>☞</span>
+    </footer>
+  </div>
+</body>
+</html>

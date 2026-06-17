@@ -1,0 +1,13 @@
+# test artefacts (Playwright)
+.playwright-mcp/
+home-desktop.jpeg
+home-hero.jpeg
+home-mobile-menu.jpeg
+home-mobile-menu2.jpeg
+*.test.jpeg
+
+# logs
+*.log
+
+# OS
+.DS_Store
