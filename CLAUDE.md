@@ -44,9 +44,10 @@ rsync (exclude node_modules/.next/.git/.env) → /var/www/kasperphi/
 ssh pi5 "cd /var/www/kasperphi && npm install && npm run build && pm2 restart kasperphi"
 curl https://kasperphi.naskaus.com/   # health 200
 ```
-- Preview live : **https://kasperphi.naskaus.com** (tunnel Cloudflare → :8059).
-- Domaine cible : **kasperphi.com** (DNS en attente — voir [[kasperphi-deploy]]).
-- cloudflared ingress `kasperphi.naskaus.com → localhost:8059` (config snapshotée).
+- Preview live : **https://kasperphi.naskaus.com** (tunnel principal NASKAUS → :8059).
+- **Domaine prod LIVE : https://kasperphi.com** (+ www) depuis 2026-06-18.
+- ⚠️ Cross-account : la zone `kasperphi.com` est dans le compte Cloudflare de **Phil**, le tunnel principal dans celui de Seb → CNAME proxifié cross-account interdit (err 1014). Solution : **2ᵉ tunnel dédié `kasperphi-phil`** (id `357c7df3-366e-44a1-9b13-8e2368a4fee5`) dans le compte de Phil, tournant sur le Pi5 via le service systemd **`cloudflared-kasperphi`** (config `/home/seb/.cloudflared/config-kasperphi.yml`, cert `cert.phil.pem`). DNS = CNAME `@`+`www` → `357c7df3….cfargotunnel.com`. Voir [[kasperphi-deploy]].
+- Ingress NASKAUS (tunnel principal) : `kasperphi.naskaus.com → localhost:8059` (config snapshotée).
 
 ## Pour Phil
 Guide non-technique : **USAGE_STUDIO.md**. Connexion `/studio` + PIN.
