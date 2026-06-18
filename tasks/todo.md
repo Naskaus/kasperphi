@@ -19,6 +19,14 @@ Decisions (Seb, 2026-06-18): Next.js + Supabase · PIN auth · Supabase Storage.
 - [ ] USAGE_STUDIO.md for Phil (non-dev guide)
 - [ ] commit + push
 
+## Review (2026-06-18) — SHIPPED ✅
+- App Next.js 15 + Supabase live : **https://kasperphi.naskaus.com** · Studio **/studio** (PIN 1789).
+- Testé bout-en-bout (vrai navigateur) : login PIN ✓, upload média → Supabase Storage ✓,
+  créer création + cover + publier ✓ (apparaît sur le site public), supprimer ✓, mobile ✓ (0 overflow).
+- Sécurité vérifiée : /studio → 307 sans cookie, /api/studio/* → 401 sans auth, RLS stricte.
+- Pi5 PM2 kasperphi online (saved). GitHub poussé. Static preview supprimé, Pages désactivé.
+- Reste : pointer kasperphi.com (DNS — action Phil, cf memory kasperphi-deploy).
+
 ## Infra
 - Supabase: ppsakhqkieqxtcevsyos (NASKAUS)
 - Pi5 port: 8059 (free) · Node v20.19.2
