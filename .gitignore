@@ -1,14 +1,19 @@
+# dependencies / build
+node_modules/
+.next/
+out/
+
+# env (secrets injected on Pi5)
+.env
+.env.local
+.env*.local
+
 # test artefacts (Playwright)
 .playwright-mcp/
-home-desktop.jpeg
-home-hero.jpeg
-home-mobile-menu.jpeg
-home-mobile-menu2.jpeg
-*.test.jpeg
+*.jpeg
 
 # logs
 *.log
 
 # OS
 .DS_Store
-live-*.jpeg
