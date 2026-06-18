@@ -41,15 +41,25 @@ nav.main-nav a { color: var(--ink); text-decoration: none; border-bottom: 2px so
 nav.main-nav a:hover, nav.main-nav a.active { color: var(--red); border-color: var(--red); }
 .burger { display: none; background: transparent; border: 2px solid var(--red); color: var(--red); padding: 9px 12px; font: inherit; font-size: 0.95rem; cursor: pointer; letter-spacing: 0.05em; }
 
-h1 { margin: 0; color: var(--red); font-size: clamp(2.8rem, 8vw, 6rem); line-height: 0.86; letter-spacing: 0.01em; }
+h1 { margin: 0; color: var(--red); font-size: clamp(2.1rem, 10vw, 6rem); line-height: 0.86; letter-spacing: 0.01em; }
 h2.section-title { text-align: center; margin: 0 0 6px; color: var(--red); font-size: clamp(1.7rem, 3vw, 2.4rem); text-transform: uppercase; letter-spacing: 0.02em; }
-.page-title { text-align: center; margin: 8px 0 0; color: var(--red); font-size: clamp(2.4rem, 7vw, 5rem); line-height: 0.9; }
+.page-title { text-align: center; margin: 8px 0 0; color: var(--red); font-size: clamp(2.2rem, 7vw, 5rem); line-height: 0.9; }
+/* Safety net: long single words (incl. Studio-authored titles) wrap instead of spilling the red frame on mobile.
+   Excludes the hero h1 (a single brand word that must never split) — its clamp already guarantees fit. */
+h2, h3, h4, .page-title, .card-title { overflow-wrap: break-word; }
+h1, h2.section-title, .page-title, h3, .card-title { text-wrap: balance; }
 .page-lead { text-align: center; max-width: 720px; margin: 14px auto 0; font-size: 1.2rem; color: var(--muted); font-style: italic; }
 .ornament { text-align: center; color: var(--red); margin: 6px 0 24px; font-size: 1.1rem; letter-spacing: 0.3em; }
 h3 { color: var(--red); font-size: 1.45rem; margin: 0 0 12px; }
 h4 { margin: 22px 0 8px; color: var(--red); font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.03em; }
 
 .hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(300px,380px); gap: 38px; align-items: center; padding: 46px 0 36px; border-bottom: 1px solid var(--line); }
+/* The hero word fills its column near full desktop width; below that the side figure
+   would crush the column and force the brand word to overflow — so stack it. */
+@media (max-width: 1120px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-figure { max-width: 460px; margin: 18px auto 0; }
+}
 .hero > div { min-width: 0; }
 .hero h2 { margin: 16px 0 18px; font-size: clamp(1.4rem,3vw,2.4rem); line-height: 1.05; text-transform: uppercase; color: var(--ink); }
 .hero p.lead { max-width: 620px; font-size: 1.25rem; margin: 0; }
@@ -108,6 +118,7 @@ form.contact { max-width: 640px; margin: 0 auto; }
 .field label { display: block; text-transform: uppercase; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; color: var(--red); margin-bottom: 6px; }
 .field input, .field textarea { width: 100%; padding: 12px 14px; border: 2px solid var(--line); background: rgba(255,255,255,0.4); font: inherit; font-size: 1rem; color: var(--ink); }
 .field input:focus, .field textarea:focus { outline: none; border-color: var(--red); }
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: 1; }
 .field textarea { min-height: 150px; resize: vertical; }
 .form-note { background: rgba(143,31,22,0.1); border: 2px solid var(--line); padding: 14px 16px; text-align: center; color: var(--red-dark); margin-top: 18px; }
 .contact-aside { text-align: center; margin-top: 30px; color: var(--muted); font-style: italic; }
