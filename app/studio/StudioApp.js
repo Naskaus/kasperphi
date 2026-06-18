@@ -187,7 +187,7 @@ function CreationsTab({ creations, onNew, onEdit, onToggle, onDelete, onMove }) 
           <div className="ctl">
             <button className="sbtn" title="Monter" onClick={() => onMove(c, -1)} disabled={i === 0}>↑</button>
             <button className="sbtn" title="Descendre" onClick={() => onMove(c, 1)} disabled={i === creations.length - 1}>↓</button>
-            <div className={"switch" + (c.status === "published" ? " on" : "")} onClick={() => onToggle(c)} role="button" title="Publier / Brouillon">
+            <div className={"switch" + (c.status === "published" ? " on" : "")} onClick={() => onToggle(c)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onToggle(c); } }} role="button" tabIndex={0} aria-pressed={c.status === "published"} title="Publier / Brouillon">
               <span className="track"><span className="knob" /></span>
               <span className="lab">{c.status === "published" ? "Publié" : "Brouillon"}</span>
             </div>
@@ -311,7 +311,7 @@ function Editor({ initial, media, onClose, onSave }) {
         </select>
 
         <label className="flabel">Diffusion</label>
-        <div className={"switch" + (f.status === "published" ? " on" : "")} onClick={() => setF({ ...f, status: f.status === "published" ? "draft" : "published" })} role="button">
+        <div className={"switch" + (f.status === "published" ? " on" : "")} onClick={() => setF({ ...f, status: f.status === "published" ? "draft" : "published" })} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setF({ ...f, status: f.status === "published" ? "draft" : "published" }); } }} role="button" tabIndex={0} aria-pressed={f.status === "published"} title="Publier / Brouillon">
           <span className="track"><span className="knob" /></span>
           <span className="lab">{f.status === "published" ? "Publié (visible sur le site)" : "Brouillon (stocké, invisible)"}</span>
         </div>
